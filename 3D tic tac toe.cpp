@@ -22,23 +22,15 @@ class Square //create class of board squares
 	char Identity;  //Identitifies which player holds the space
 	bool Occupied; //Tells if the space is occupied.
 		
-	
 public: 
 
-	Square(); //constructor
-	
-	~Square(); //destructor
-	
+	Square(); 
+	~Square(); 
+
 	void SetIdentity(int);
-	
 	void Move(char player);
-	
 	char GetIdent() const {return Identity;}
-	
-	bool GetOcc() const {return Occupied;}
-	
-	
-	
+	bool GetOcc() const {return Occupied;
 };
 
 class TicTacToe //class which holds the board and gameplay
@@ -53,36 +45,26 @@ class TicTacToe //class which holds the board and gameplay
 	
 public:	
 	TicTacToe();
-	
 	~TicTacToe();
 	
 	int Play();
-	
 	int CheckForWinner();
-	
 	void DisplayBoard() const;
-	
 	void Count() {counter++;}
-	
 	int GetCount() {return counter;}
-	
 	int cpuMove();
-	
 	void SetFirst(char player) {firstMove = player;}
-	
 	char GetFirst() {return firstMove;}
 };
-
 
 main()
 {
 		
-	TicTacToe Game1; //Calls instance of TicTacToe
-
-	Game1.Play(); //Calls function from within the instance
+	TicTacToe Game1; 
+	Game1.Play(); 
 }
 
-Square::Square() : Occupied(false) //initiates Occupied status
+Square::Square() : Occupied(false) /
 {	
 }
 
@@ -90,15 +72,10 @@ Square::~Square()
 {
 }
 
-
-
 void Square::Move(char player)
 {
 	Identity = player;
-	
 	Occupied = true;
-	
-	
 }
 
 void Square::SetIdentity(int numb)
@@ -113,16 +90,11 @@ TicTacToe::TicTacToe() : Human('\0'), CPU('\0'), Winner(false), counter(0)
 		
 		for(x = 0; x < 3; x++)
 		{
-			
 			for(i = 0; i < 9; i++)
 			{
-				
 				ArSquares[x][i].SetIdentity(i + 49);
-		
 			}
-				
 		}
-	
 			srand(time(0));
 			int Number = rand() % 2 + 1;
 		
@@ -131,8 +103,6 @@ TicTacToe::TicTacToe() : Human('\0'), CPU('\0'), Winner(false), counter(0)
 				Turn = 'O';
 			else
 				Turn = 'X';
-				
-				
 	}
 
 TicTacToe::~TicTacToe()
@@ -149,24 +119,18 @@ int TicTacToe::Play()
 		cout << "Enter X or O: ";	cin >> Human;
 		Human = toupper(Human);
 	
-	
 		if(Human == 'X')
 			CPU = 'O';
 		else
 			CPU = 'X';
-			
-	
 	}
 		
 	while(!Winner) 
 	{
-		
-		
 		while(Turn == CPU)
 		{
 			cpuMove();
 		}
-		
 		CheckForWinner();
 		if(Winner)
 			break;
@@ -194,8 +158,6 @@ int TicTacToe::Play()
 					ArSquares[Number1 - 1][Number2 - 1].Move(Human);
 					Count();
 					Turn = CPU;
-					
-				
 				}
 			else
 			{
@@ -209,6 +171,7 @@ int TicTacToe::Play()
 	char response;
 	cout << "\n Play again?  Y/N:  "; cin >> response;
 	response = tolower(response);
+	
 	if(response == 'y')
 	{
 		this->~TicTacToe();
@@ -224,141 +187,138 @@ int TicTacToe::CheckForWinner()
 {
 
 
-if(ArSquares[0][0].GetIdent() == ArSquares[1][1].GetIdent() && ArSquares[0][0].GetIdent() == ArSquares[2][2].GetIdent())
-{
-	Winner = true;
-	DisplayBoard();
-	printf("Player %c wins!!!", ArSquares[0][0].GetIdent());
-	return 0;
-}
-
-if(ArSquares[0][2].GetIdent() == ArSquares[1][1].GetIdent() && ArSquares[0][2].GetIdent() == ArSquares[2][0].GetIdent())
-{
-	Winner = true;
-	DisplayBoard();
-	printf("Player %c wins!!!", ArSquares[0][2].GetIdent());
-	return 0;
-}
-
-if(ArSquares[0][0].GetIdent() == ArSquares[1][3].GetIdent() && ArSquares[0][0].GetIdent() == ArSquares[2][6].GetIdent())
-{
-	Winner = true;
-	DisplayBoard();
-	printf("Player %c wins!!!", ArSquares[0][0].GetIdent());
-	return 0;
-}
-
-if(ArSquares[0][6].GetIdent() == ArSquares[1][3].GetIdent() && ArSquares[0][6].GetIdent() == ArSquares[2][0].GetIdent())
-{
-	Winner = true;
-	DisplayBoard();
-	printf("Player %c wins!!!", ArSquares[0][6].GetIdent());
-	return 0;
-}
-
-if(ArSquares[0][6].GetIdent() == ArSquares[1][7].GetIdent() && ArSquares[0][6].GetIdent() == ArSquares[2][8].GetIdent())
-{
-	Winner = true;
-	DisplayBoard();
-	printf("Player %c wins!!!", ArSquares[0][6].GetIdent());
-	return 0;
-}
-
-if(ArSquares[0][8].GetIdent() == ArSquares[1][7].GetIdent() && ArSquares[0][8].GetIdent() == ArSquares[2][6].GetIdent())
-{
-	Winner = true;
-	DisplayBoard();
-	printf("Player %c wins!!!", ArSquares[0][8].GetIdent());
-	return 0;
-}
-
-if(ArSquares[0][2].GetIdent() == ArSquares[1][5].GetIdent() && ArSquares[0][2].GetIdent() == ArSquares[2][8].GetIdent())
-
-{
-	Winner = true;
-	DisplayBoard();
-	printf("Player %c wins!!!", ArSquares[0][2].GetIdent());
-	return 0;
-}
-
-if(ArSquares[0][8].GetIdent() == ArSquares[1][5].GetIdent() && ArSquares[0][8].GetIdent() == ArSquares[2][2].GetIdent())
-{
-	Winner = true;
-	DisplayBoard();
-	printf("Player %c wins!!!", ArSquares[0][8].GetIdent());
-	return 0;
-}
-
-if(ArSquares[0][1].GetIdent() == ArSquares[1][4].GetIdent() && ArSquares[0][1].GetIdent() == ArSquares[2][7].GetIdent())
-{
-	Winner = true;
-	DisplayBoard();
-	printf("Player %c wins!!!", ArSquares[0][1].GetIdent());
-	return 0;
-}
-
-if(ArSquares[0][7].GetIdent() == ArSquares[1][4].GetIdent() && ArSquares[0][7].GetIdent() == ArSquares[2][1].GetIdent())
-{
-	Winner = true;
-	DisplayBoard();
-	printf("Player %c wins!!!", ArSquares[0][7].GetIdent());
-	return 0;
-}
-
-if(ArSquares[0][3].GetIdent() == ArSquares[1][4].GetIdent() && ArSquares[0][3].GetIdent() == ArSquares[2][5].GetIdent())
-{
-	Winner = true;
-	DisplayBoard();
-	printf("Player %c wins!!!", ArSquares[0][3].GetIdent());
-	return 0;
-}
-
-if(ArSquares[0][5].GetIdent() == ArSquares[1][4].GetIdent() && ArSquares[0][5].GetIdent() == ArSquares[2][3].GetIdent())
-
-{
-	Winner = true;
-	DisplayBoard();
-	printf("Player %c wins!!!", ArSquares[0][5].GetIdent());
-	return 0;
-}
-
-if(ArSquares[0][0].GetIdent() == ArSquares[1][4].GetIdent() && ArSquares[0][0].GetIdent() == ArSquares[2][8].GetIdent())
-{
-	Winner = true;
-	DisplayBoard();
-	printf("Player %c wins!!!", ArSquares[0][0].GetIdent());
-	return 0;
-}
-
-if(ArSquares[0][8].GetIdent() == ArSquares[1][4].GetIdent() && ArSquares[0][8].GetIdent() == ArSquares[2][0].GetIdent())
-{
-	Winner = true;
-	DisplayBoard();
-	printf("Player %c wins!!!", ArSquares[0][8].GetIdent());
-	return 0;
-}
-
-if(ArSquares[0][2].GetIdent() == ArSquares[1][4].GetIdent() && ArSquares[0][2].GetIdent() == ArSquares[2][6].GetIdent())
-{
-	Winner = true;
-	DisplayBoard();
-	printf("Player %c wins!!!", ArSquares[0][2].GetIdent());
-	return 0;
-}
-
-if(ArSquares[0][6].GetIdent() == ArSquares[1][4].GetIdent() && ArSquares[0][6].GetIdent() == ArSquares[2][2].GetIdent())
-{
-	Winner = true;
-	DisplayBoard();
-	printf("Player %c wins!!!", ArSquares[0][6].GetIdent());
-	return 0;
-}
+	if(ArSquares[0][0].GetIdent() == ArSquares[1][1].GetIdent() && ArSquares[0][0].GetIdent() == ArSquares[2][2].GetIdent())
+	{
+		Winner = true;
+		DisplayBoard();
+		printf("Player %c wins!!!", ArSquares[0][0].GetIdent());
+		return 0;
+	}
 	
+	if(ArSquares[0][2].GetIdent() == ArSquares[1][1].GetIdent() && ArSquares[0][2].GetIdent() == ArSquares[2][0].GetIdent())
+	{
+		Winner = true;
+		DisplayBoard();
+		printf("Player %c wins!!!", ArSquares[0][2].GetIdent());
+		return 0;
+	}
 	
+	if(ArSquares[0][0].GetIdent() == ArSquares[1][3].GetIdent() && ArSquares[0][0].GetIdent() == ArSquares[2][6].GetIdent())
+	{
+		Winner = true;
+		DisplayBoard();
+		printf("Player %c wins!!!", ArSquares[0][0].GetIdent());
+		return 0;
+	}
+	
+	if(ArSquares[0][6].GetIdent() == ArSquares[1][3].GetIdent() && ArSquares[0][6].GetIdent() == ArSquares[2][0].GetIdent())
+	{
+		Winner = true;
+		DisplayBoard();
+		printf("Player %c wins!!!", ArSquares[0][6].GetIdent());
+		return 0;
+	}
+	
+	if(ArSquares[0][6].GetIdent() == ArSquares[1][7].GetIdent() && ArSquares[0][6].GetIdent() == ArSquares[2][8].GetIdent())
+	{
+		Winner = true;
+		DisplayBoard();
+		printf("Player %c wins!!!", ArSquares[0][6].GetIdent());
+		return 0;
+	}
+	
+	if(ArSquares[0][8].GetIdent() == ArSquares[1][7].GetIdent() && ArSquares[0][8].GetIdent() == ArSquares[2][6].GetIdent())
+	{
+		Winner = true;
+		DisplayBoard();
+		printf("Player %c wins!!!", ArSquares[0][8].GetIdent());
+		return 0;
+	}
+	
+	if(ArSquares[0][2].GetIdent() == ArSquares[1][5].GetIdent() && ArSquares[0][2].GetIdent() == ArSquares[2][8].GetIdent())
+	
+	{
+		Winner = true;
+		DisplayBoard();
+		printf("Player %c wins!!!", ArSquares[0][2].GetIdent());
+		return 0;
+	}
+	
+	if(ArSquares[0][8].GetIdent() == ArSquares[1][5].GetIdent() && ArSquares[0][8].GetIdent() == ArSquares[2][2].GetIdent())
+	{
+		Winner = true;
+		DisplayBoard();
+		printf("Player %c wins!!!", ArSquares[0][8].GetIdent());
+		return 0;
+	}
+	
+	if(ArSquares[0][1].GetIdent() == ArSquares[1][4].GetIdent() && ArSquares[0][1].GetIdent() == ArSquares[2][7].GetIdent())
+	{
+		Winner = true;
+		DisplayBoard();
+		printf("Player %c wins!!!", ArSquares[0][1].GetIdent());
+		return 0;
+	}
+	
+	if(ArSquares[0][7].GetIdent() == ArSquares[1][4].GetIdent() && ArSquares[0][7].GetIdent() == ArSquares[2][1].GetIdent())
+	{
+		Winner = true;
+		DisplayBoard();
+		printf("Player %c wins!!!", ArSquares[0][7].GetIdent());
+		return 0;
+	}
+	
+	if(ArSquares[0][3].GetIdent() == ArSquares[1][4].GetIdent() && ArSquares[0][3].GetIdent() == ArSquares[2][5].GetIdent())
+	{
+		Winner = true;
+		DisplayBoard();
+		printf("Player %c wins!!!", ArSquares[0][3].GetIdent());
+		return 0;
+	}
+	
+	if(ArSquares[0][5].GetIdent() == ArSquares[1][4].GetIdent() && ArSquares[0][5].GetIdent() == ArSquares[2][3].GetIdent())
+	
+	{
+		Winner = true;
+		DisplayBoard();
+		printf("Player %c wins!!!", ArSquares[0][5].GetIdent());
+		return 0;
+	}
+	
+	if(ArSquares[0][0].GetIdent() == ArSquares[1][4].GetIdent() && ArSquares[0][0].GetIdent() == ArSquares[2][8].GetIdent())
+	{
+		Winner = true;
+		DisplayBoard();
+		printf("Player %c wins!!!", ArSquares[0][0].GetIdent());
+		return 0;
+	}
+	
+	if(ArSquares[0][8].GetIdent() == ArSquares[1][4].GetIdent() && ArSquares[0][8].GetIdent() == ArSquares[2][0].GetIdent())
+	{
+		Winner = true;
+		DisplayBoard();
+		printf("Player %c wins!!!", ArSquares[0][8].GetIdent());
+		return 0;
+	}
+	
+	if(ArSquares[0][2].GetIdent() == ArSquares[1][4].GetIdent() && ArSquares[0][2].GetIdent() == ArSquares[2][6].GetIdent())
+	{
+		Winner = true;
+		DisplayBoard();
+		printf("Player %c wins!!!", ArSquares[0][2].GetIdent());
+		return 0;
+	}
+	
+	if(ArSquares[0][6].GetIdent() == ArSquares[1][4].GetIdent() && ArSquares[0][6].GetIdent() == ArSquares[2][2].GetIdent())
+	{
+		Winner = true;
+		DisplayBoard();
+		printf("Player %c wins!!!", ArSquares[0][6].GetIdent());
+		return 0;
+	}
 	
 	int x;
 	int i;
-	//checks the board to see if there's a winner
 	for(x = 0; x < 3;x++)
 	{
 	
@@ -368,7 +328,6 @@ if(ArSquares[0][6].GetIdent() == ArSquares[1][4].GetIdent() && ArSquares[0][6].G
 			DisplayBoard();
 			printf("Player %c wins!!!", ArSquares[x][0].GetIdent());
 			return 0;
-			
 		}
 		if(ArSquares[x][0].GetIdent() == ArSquares[x][3].GetIdent() && ArSquares[x][3].GetIdent() == ArSquares[x][6].GetIdent())
 		{
@@ -430,7 +389,6 @@ if(ArSquares[0][6].GetIdent() == ArSquares[1][4].GetIdent() && ArSquares[0][6].G
 					DisplayBoard();
 					printf("\nPlayer %c wins!!!\n", ArSquares[0][i].GetIdent());
 					return 0;
-					
 				}
 			}
 			else{}
@@ -488,8 +446,6 @@ int TicTacToe::cpuMove()
 			ArSquares[1][4].Move(CPU);
 			Count();
 			Turn = Human; return 0;
-			
-			
 		}
 	else if (counter == 1)
 	{
@@ -515,7 +471,6 @@ int TicTacToe::cpuMove()
 			{
 				if(ArSquares[x][1].GetIdent() == Human || ArSquares[x][2].GetIdent() == Human) 
 				{
-				
 					ArSquares[0][8].Move(CPU);
 					Count();
 					Turn = Human; return 0;
@@ -538,7 +493,6 @@ int TicTacToe::cpuMove()
 			ArSquares[0][2].Move(CPU);
 			Count();
 			Turn = Human; return 0;	
-		
 		}
 		
 	for(x = 0; x < 3;x++)
@@ -547,7 +501,6 @@ int TicTacToe::cpuMove()
 			{
 				if(!ArSquares[x][2].GetOcc())
 				{
-				
 					ArSquares[x][2].Move(CPU);
 					Count();
 					Turn == Human; return 0;
@@ -1127,8 +1080,6 @@ int TicTacToe::cpuMove()
 			}
 		}
 		
-		
-		
 	if(ArSquares[0][6].GetIdent() == CPU && ArSquares[1][4].GetIdent() == CPU)
 		{
 			if(!ArSquares[2][2].GetOcc())
@@ -1183,7 +1134,6 @@ int TicTacToe::cpuMove()
 				Turn = Human; return 0;
 			}
 		}
-		
 		
 	if(ArSquares[0][6].GetIdent() == Human && ArSquares[1][4].GetIdent() == Human)
 		{
@@ -1364,7 +1314,6 @@ int TicTacToe::cpuMove()
 		}
 	}
 	
-	
 	for(i = 0; i < 9; i++)
 	{
 		if(ArSquares[0][i].GetIdent() == Human && ArSquares[1][i].GetIdent() == Human)
@@ -1433,7 +1382,6 @@ int TicTacToe::cpuMove()
 			}
 	}
 		
-	
 	int Number2 = rand() % 9;
 	int Number1 = rand() % 3;
 	cout << Number1 <<endl;
@@ -1444,5 +1392,4 @@ int TicTacToe::cpuMove()
 		Count();
 		Turn = Human; return 0;
 	}
-
 }
